@@ -3,6 +3,7 @@
 use Livewire\Volt\Component;
 use Illuminate\Validation\Rules\Password;
 use App\Models\Tenant;
+use TallStackUi\Traits\Interactions;
 
 new class extends Component {
     public $domain_name;
@@ -11,6 +12,8 @@ new class extends Component {
     public $password;
     public $password_confirmation;
 
+    use Interactions;
+    
     public function submit()
     {
         $validatedData = $this->validate([
@@ -20,18 +23,41 @@ new class extends Component {
             'password' => ['required', 'confirmed', Password::defaults()]
         ]);
 
-        // save tenant
-        $tenant = Tenant::create($validatedData);
-        $createdTenant = Tenant::findOrFail($tenant->id);
-        $createdTenant->user_id = Auth::user()->id;
-        $createdTenant->save();
+        // get user domaine
+        $domaine = Tenant::where('user_id', Auth::user()->id)->count();
 
-        //save tenant domain
-        $tenant->domains()->create([
-            'domain' => $validatedData['domain_name'].'.'.config('app.domain'),
-        ]);
+        if($domaine < 1)
+        {
+            // save tenant
+            $tenant = Tenant::create($validatedData);
+            $createdTenant = Tenant::findOrFail($tenant->id);
+            $createdTenant->user_id = Auth::user()->id;
+            $createdTenant->save();
+
+            //save tenant domain
+            $tenant->domains()->create([
+                'domain' => $validatedData['domain_name'].'.'.config('app.domain'),
+            ]);
+
+
+            $this->reset();
+            
+            $this->banner()
+                ->close()
+                ->success('Domaine.'.$this->domain_name. 'bien enregistre !')
+                ->leave(5)
+                ->send();
+
+        }else{
+            $this->banner()
+                ->close()
+                ->error('Vous avez atteint le nombre maximum')
+                ->leave(5)
+                ->send();
+        }
+
+        //redirect(route('stores.index'));
         
-        redirect(route('stores.index'));
     }
 
 }; ?>
@@ -50,6 +76,5 @@ new class extends Component {
         <div class="pt-4">
             <x-ts-button type="submit" primary right-icon="calendar" spinner>Sauvegarder le domaine</x-ts-button>
         </div>
-        <x-ts-errors />
     </form>
 </div>

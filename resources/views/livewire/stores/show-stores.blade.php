@@ -5,7 +5,13 @@ use App\Models\Tenant;
 
 new class extends Component {
 
-    
+    public function delete($tenantId)
+    {
+        $tenant = Tenant::where('id', $tenantId)->first();
+        //$this->authorize('delete', $tenant);
+        $tenant->delete();
+    }
+
     public function placeholder()
     {
         return <<<'HTML'
@@ -50,6 +56,9 @@ new class extends Component {
                                 @else
                                     <p class="text-xl font-bold text-gray-500">{{ $tenant->name }}</p>
                                 @endcan
+                                @foreach ($tenant->domains as $domain )
+                                    <p class="mt-2 text-xs">{{ Str::limit($domain->domain, 50) }}</p>
+                                @endforeach
                             </div>
                             <div class="text-xs text-gray-500">
                                 {{ \Carbon\Carbon::parse($tenant->created_at)->format('M-d-Y') }}
