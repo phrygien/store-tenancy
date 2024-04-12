@@ -48,7 +48,7 @@ new class extends Component {
         <x-ts-password label="Comfirmer mot de passe *"
                      wire:model='password_confirmation'/>
         <div class="pt-4">
-            <x-ts-button type="submit" primary right-icon="calendar" spinner>Save tenant</x-ts-button>
+            <x-ts-button type="submit" primary right-icon="calendar" spinner>Sauvegarder le domaine</x-ts-button>
         </div>
         <x-ts-errors />
     </form>

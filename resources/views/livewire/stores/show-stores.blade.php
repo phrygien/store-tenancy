@@ -38,8 +38,7 @@ new class extends Component {
                     domaine</x-ts-button>
             </div>
         @else
-            <x-ts-button class="mb-12" primary icon-right="plus" href="{{ route('stores.create') }}" wire:navigate>Create
-                store</x-ts-button>
+            <x-ts-button class="mb-12" primary icon-right="plus" href="{{ route('stores.create') }}" wire:navigate>Créez votre domaine</x-ts-button>
             <div class="grid grid-cols-3 gap-4">
                 @foreach ($tenants as $tenant)
                     <x-ts-card wire:key='{{ $tenant->id }}'>
