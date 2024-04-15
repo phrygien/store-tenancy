@@ -10,7 +10,7 @@
         <!-- component -->
             <div class="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2">
                 <h1 class="pb-12 text-5xl text-center">Store Service</h1>
-                <div class="grid grid-cols-1 mt-6 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-28 lg:gap-y-16">
+                <div class="grid grid-cols-1 mt-6 lg:grid-cols-2 xl:grid-cols-4 gap-x-4 gap-y-28 lg:gap-y-16">
                     <div class="relative flex flex-col h-48 text-gray-700 bg-white shadow-md group rounded-xl bg-clip-border">
                         <a href="#" class="block">
                             <div class="h-28">
@@ -23,7 +23,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Automotive
                                 </p>
                             </div>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Toys and Baby Products
                                 </p>
                             </div>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Medical
                                 </p>
                             </div>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Glass
                                 </p>
                             </div>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Jewelry Coins and Medallions
                                 </p>
                             </div>
@@ -120,7 +120,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Electric
                                 </p>
                             </div>
@@ -140,7 +140,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Packaging / FMCG
                                 </p>
                             </div>
@@ -160,7 +160,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Footwear
                                 </p>
                             </div>
@@ -180,7 +180,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Backpacks and Umbrella
                                 </p>
                             </div>
@@ -200,7 +200,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Caps and Closures
                                 </p>
                             </div>
@@ -219,7 +219,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Confectionery
                                 </p>
                             </div>
@@ -238,7 +238,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Cosmetics
                                 </p>
                             </div>
@@ -258,7 +258,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Electronics
                                 </p>
                             </div>
@@ -278,7 +278,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Consumer Electronics
                                 </p>
                             </div>
@@ -297,7 +297,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Promotional
                                 </p>
                             </div>
@@ -317,7 +317,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Sports
                                 </p>
                             </div>
@@ -336,7 +336,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Stationery
                                 </p>
                             </div>
@@ -355,7 +355,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Tools
                                 </p>
                             </div>
@@ -375,7 +375,7 @@
                             </div>
                             <div class="z-10 w-full p-6 ">
                                 <p
-                                    class="inline-block w-full mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-center text-tg">
+                                    class="inline-block w-full mb-2 font-sans antialiased font-semibold leading-snug tracking-normal text-center text-md text-tg">
                                     Utensils
                                 </p>
                             </div>
