@@ -35,5 +35,9 @@ Route::middleware([
         ->middleware(['auth'])
         ->name('profile');
 
+    Route::view('magasins', 'magasins.index')
+    ->middleware(['auth'])
+    ->name('magasins.index');
+
     require __DIR__.'/app-auth.php';
 });
