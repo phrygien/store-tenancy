@@ -20,13 +20,13 @@
             <livewire:app.app-navigation />
 
             <!-- Page Heading -->
-            @if (isset($header))
+            {{-- @if (isset($header))
                 <header class="bg-white shadow dark:bg-gray-800">
                     <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
-            @endif
+            @endif --}}
 
             <!-- Page Content -->
             <main>
@@ -35,4 +35,7 @@
         </div>
         <script src="./node_modules/preline/dist/preline.js"></script>
     </body>
+    <script>
+        window.HSStaticMethods.autoInit();
+    </script>
 </html>
