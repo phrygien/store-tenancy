@@ -9,8 +9,8 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <!-- component -->
             <div class="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2">
-                <h1 class="pb-12 text-5xl text-center">Store Service</h1>
-                <div class="grid grid-cols-1 mt-6 lg:grid-cols-2 xl:grid-cols-4 gap-x-4 gap-y-28 lg:gap-y-16">
+                <h1 class="pb-12 text-5xl text-center dark:text-rose-500">Store Service</h1>
+                <div class="grid grid-cols-1 mt-6 lg:grid-cols-2 xl:grid-cols-5 gap-x-4 gap-y-28 lg:gap-y-16">
                     <div class="relative flex flex-col h-48 text-gray-700 bg-white shadow-md group rounded-xl bg-clip-border">
                         <a href="#" class="block">
                             <div class="h-28">

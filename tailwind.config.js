@@ -13,6 +13,7 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './vendor/tallstackui/tallstackui/src/**/*.php',
+        'node_modules/preline/dist/*.js',
     ],
 
     theme: {
@@ -26,5 +27,5 @@ export default {
         },
     },
 
-    plugins: [forms, require("daisyui")],
+    plugins: [forms, require("daisyui"), require('preline/plugin')],
 };
