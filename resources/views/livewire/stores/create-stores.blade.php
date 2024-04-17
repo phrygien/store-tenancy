@@ -6,6 +6,7 @@ use App\Models\Tenant;
 use TallStackUi\Traits\Interactions;
 
 new class extends Component {
+    public $id;
     public $domain_name;
     public $name;
     public $email;
@@ -17,6 +18,7 @@ new class extends Component {
     public function submit()
     {
         $validatedData = $this->validate([
+            'id' => ['nullable'],
             'domain_name' => ['required', 'string', 'min:5'],
             'email' => ['required', 'email'],
             'name' => ['required'],
@@ -25,7 +27,7 @@ new class extends Component {
 
         // get user domaine
         $domaine = Tenant::where('user_id', Auth::user()->id)->count();
-
+        $validatedData['id'] = $this->domain_name;
         if($domaine < 1)
         {
             // save tenant
