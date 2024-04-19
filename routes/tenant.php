@@ -23,9 +23,10 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    Route::get('/', function () {
-        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
-    });
+    // Route::get('/', function () {
+    //     return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+    // });
+    Route::view('/', 'app.welcome');
 
     Route::view('dashboard', 'app.dashboard')
     ->middleware(['auth', 'verified'])
@@ -35,9 +36,9 @@ Route::middleware([
         ->middleware(['auth'])
         ->name('profile');
 
-    Route::view('magasins', 'magasins.index')
+    Route::view('ecoles', 'schools.ecole.index')
     ->middleware(['auth'])
-    ->name('magasins.index');
+    ->name('ecoles.index');
 
     require __DIR__.'/app-auth.php';
 });
