@@ -246,36 +246,44 @@ new class extends Component
           </svg>
             {{ __('Etablissements') }}
         </x-nav-link-app>
-<li class="hs-accordion" id="projects-accordion" x-data="{ isOpen: localStorage.getItem('projectsAccordionOpen') === 'true' || false }" x-init="() => { $watch('isOpen', value => localStorage.setItem('projectsAccordionOpen', value)) }">
-  <button type="button" @click="isOpen = !isOpen" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hs-accordion-active:text-white">
-    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-    Projects
+        <li class="hs-accordion" id="projects-accordion" x-data="{ isOpen: sessionStorage.getItem('projectsAccordionOpen') === 'true' || false }" x-init="() => { $watch('isOpen', value => sessionStorage.setItem('projectsAccordionOpen', value)) }">
+            <button type="button" @click="isOpen = !isOpen; if(isOpen) sessionStorage.removeItem('projectsAccordionOpen');" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hs-accordion-active:text-white">
+              <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <span class="float-right">Projects</span>
 
-    <svg x-show="isOpen" class="hs-accordion-active:block ms-auto size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+              <svg x-show="isOpen" class="hs-accordion-active:block ms-auto size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
 
-    <svg x-show="!isOpen" class="block hs-accordion-active:hidden ms-auto size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-  </button>
+              <svg x-show="!isOpen" class="block hs-accordion-active:hidden ms-auto size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
 
-  <div id="projects-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" x-show="isOpen">
-    <ul class="pt-2 ps-2">
-      <li>
-        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300" href="#">
-          Link 1
-        </a>
-      </li>
-      <li>
-        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300" href="#">
-          Link 2
-        </a>
-      </li>
-      <li>
-        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300" href="#">
-          Link 3
-        </a>
-      </li>
-    </ul>
-  </div>
-</li>
+            <div id="projects-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" x-show="isOpen">
+              <ul class="pt-2 ps-2">
+                <li>
+                  <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300" href="#">
+                    Link 1
+                  </a>
+                </li>
+                <li>
+                  <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300" href="#">
+                    Link 2
+                  </a>
+                </li>
+                <li>
+                  <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-neutral-700 rounded-lg hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300" href="#">
+                    Link 3
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+
+
+
+
+
+
+
 
 
         {{-- <li>
