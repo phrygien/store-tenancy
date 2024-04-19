@@ -61,7 +61,8 @@ class SeedTenantJob implements ShouldQueue
             // Vous pouvez journaliser un avertissement ou envoyer une notification
         }
 
-
+        // DB::purge();
+        // DB::reconnect();
         $this->tenant->run(function(){
             User::create([
                 'name' => $this->tenant->name,

@@ -27,8 +27,8 @@ return new class extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('cascade'); 
             $table->text('logo')->nullable();
-            $table->string('category');
             $table->boolean('is_active')->default(true);
+            $table->foreignId('category_id')->nullable();
             $table->timestamps();
         });
     }

@@ -205,6 +205,7 @@ return [
         'hint' => Components\Form\Hint::class,
         'icon' => Components\Icon::class,
         'input' => Components\Form\Input::class,
+        'upload' => Components\Form\Upload::class,
         'label' => Components\Form\Label::class,
         'link' => Components\Link::class,
         'loading' => Components\Loading::class,
