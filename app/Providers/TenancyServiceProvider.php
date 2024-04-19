@@ -8,6 +8,7 @@ use App\Jobs\SeedTenantJob;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Features\SupportFileUploads\FilePreviewController;
 use Livewire\Livewire;
 use Stancl\JobPipeline\JobPipeline;
 use Stancl\Tenancy\Events;
@@ -20,6 +21,7 @@ class TenancyServiceProvider extends ServiceProvider
 {
     // By default, no namespace is used to support the callable array syntax.
     public static string $controllerNamespace = '';
+
 
     public function events()
     {
@@ -98,7 +100,8 @@ class TenancyServiceProvider extends ServiceProvider
 
     public function register()
     {
-        //
+        // specify the right identification middleware
+        FilePreviewController::$middleware = ['web', 'universal', InitializeTenancyByDomain::class];
     }
 
     public function boot()

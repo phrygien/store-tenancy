@@ -23,35 +23,34 @@
 
                         <div>
                             <label for="province_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provinces</label>
-                            <x-ts-select.styled wire:model='province_id' :request="[
-                                'url' => route('ecoles.index'),
+                            <x-ts-select.styled wire:model.live='province_id' :request="[
+                                'url' => route('api.provinces.index'),
                                 'method' => 'get',
-                                'params' => ['library' => 'TallStackUi'],
-                            ]" select="label:name|value:id" />
+                            ]" select="label:nom|value:id" placeholder="select province" />
                         </div>
                         <div>
                             <label for="region_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regions</label>
-                            <x-ts-select.styled wire:model='region_id' :request="[
-                                'url' => route('ecoles.index'),
+                            <x-ts-select.styled wire:model.live='region_id' :request="[
+                                'url' => route('api.regions.index'),
                                 'method' => 'get',
-                                'params' => ['library' => 'TallStackUi'],
-                            ]" select="label:name|value:id" />
+                                'params' => ['province_id' => $province_id   ],
+                            ]" select="label:nom|value:id" placeholder="select region" />
                         </div>
                         <div>
                             <label for="district_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Districts</label>
-                            <x-ts-select.styled wire:model='district_id' :request="[
-                                'url' => route('ecoles.index'),
+                            <x-ts-select.styled wire:model.live='district_id' :request="[
+                                'url' => route('api.districts.index'),
                                 'method' => 'get',
-                                'params' => ['library' => 'TallStackUi'],
-                            ]" select="label:name|value:id" />
+                                'params' => ['id_region' => $region_id],
+                            ]" select="label:libelle|value:id" />
                         </div>
                         <div>
                             <label for="commune_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Commune</label>
-                            <x-ts-select.styled wire:model='commune_id' :request="[
-                                'url' => route('ecoles.index'),
+                            <x-ts-select.styled wire:model.live='commune_id' :request="[
+                                'url' => route('api.communes.index'),
                                 'method' => 'get',
-                                'params' => ['library' => 'TallStackUi'],
-                            ]" select="label:name|value:id" />
+                                'params' => ['district_id' => $district_id],
+                            ]" select="label:nom|value:id" />
                         </div>
                         <div class="sm:col-span-2">
                             <label for="adresse" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse exacte</label>
@@ -67,7 +66,7 @@
                         </div>
                         <div>
                             <label for="item-weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Logo</label>
-                            <x-ts-upload wire:model='logo' />
+                            <x-ts-upload wire:model='photos' :preview="false" />
                         </div>
                         <div>
                             <x-ts-toggle wire:click='toggleIsActive'/>

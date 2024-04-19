@@ -7,7 +7,7 @@
 
     <div class="flex justify-center py-12">
         <div class="w-full sm:px-7 lg:px-8">
-            <livewire:school.ecole-create lazy />
+            <livewire:school.ecole-create />
         </div>
     </div>
 

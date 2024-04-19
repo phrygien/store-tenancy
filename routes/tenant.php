@@ -2,9 +2,14 @@
 
 declare(strict_types=1);
 
+use App\Models\Commune;
+use App\Models\District;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+use App\Models\Province;
+use App\Models\Region;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +49,99 @@ Route::middleware([
     Route::view('ecoles/create', 'schools.ecole.create')
     ->middleware(['auth'])
     ->name('ecoles.create');
+
+
+
+    Route::get('/provinces', function (Request $request) {
+        // getting initial selected values
+        $selected = json_decode($request->get('selected', ''), true);
+
+        return Province::query()
+            ->when(
+                $search = $request->get('search'),
+                fn ($query) => $query->where('nom', 'like', "%{$search}%")
+            )
+            ->when(!$search && $selected, function ($query) use ($selected) {
+                $query->whereIn('id', $selected)
+                    ->orWhere(function ($query) use ($selected) {
+                        $query->whereNotIn('id', $selected)
+                            ->orderBy('nom');
+                    });
+            })
+            ->limit(10)
+            ->get()
+            // mapping to the expected format
+            ->map(fn (Province $province) => $province->only('id', 'nom'));
+    })->name('api.provinces.index');
+
+    // get region by province_id
+    Route::get('/regions', function (Request $request) {
+        $selected = json_decode($request->get('selected', ''), true);
+        $province_id = $request->get('province_id');
+
+        return Region::query()
+            ->when(
+                $search = $request->get('search'),
+                fn ($query) => $query->where('nom', 'like', "%{$search}%")
+            )
+            ->when(!$search && $selected, function ($query) use ($selected) {
+                $query->whereIn('id', $selected)
+                    ->orWhere(function ($query) use ($selected) {
+                        $query->whereNotIn('id', $selected)
+                            ->orderBy('nom');
+                    });
+            })
+            ->where('id_province', $province_id)
+            //->limit(10)
+            ->get()
+            ->map(fn (Region $region) => $region->only('id', 'nom'));
+    })->name('api.regions.index');
+
+    // get district by regionId
+    Route::get('/districts', function (Request $request) {
+        $selected = json_decode($request->get('selected', ''), true);
+        $id_region = $request->get('id_region');
+
+        return District::query()
+            ->when(
+                $search = $request->get('search'),
+                fn ($query) => $query->where('libelle', 'like', "%{$search}%")
+            )
+            ->when(!$search && $selected, function ($query) use ($selected) {
+                $query->whereIn('id', $selected)
+                    ->orWhere(function ($query) use ($selected) {
+                        $query->whereNotIn('id', $selected)
+                            ->orderBy('libelle');
+                    });
+            })
+            ->where('id_region', $id_region)
+            //->limit(10)
+            ->get()
+            ->map(fn (District $region) => $region->only('id', 'libelle'));
+    })->name('api.districts.index');
+
+    // get commune by district
+    Route::get('/communes', function (Request $request) {
+        $selected = json_decode($request->get('selected', ''), true);
+        $district_id = $request->get('district_id');
+
+        return Commune::query()
+            ->when(
+                $search = $request->get('search'),
+                fn ($query) => $query->where('nom', 'like', "%{$search}%")
+            )
+            ->when(!$search && $selected, function ($query) use ($selected) {
+                $query->whereIn('id', $selected)
+                    ->orWhere(function ($query) use ($selected) {
+                        $query->whereNotIn('id', $selected)
+                            ->orderBy('nom');
+                    });
+            })
+            ->where('id_district', $district_id)
+            //->limit(10)
+            ->get()
+            ->map(fn (Commune $region) => $region->only('id', 'nom'));
+    })->name('api.communes.index');
 
 
     require __DIR__.'/app-auth.php';
