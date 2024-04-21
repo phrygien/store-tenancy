@@ -17,6 +17,7 @@ class EcoleCreate extends Component
     public $region_id;
     public $district_id;
     public $commune_id;
+    public $featuredImage;
 
     public $is_active = false;
 
@@ -95,7 +96,7 @@ class EcoleCreate extends Component
 
     public function saveEcole(): void
     {
-        dd($this->region_id);
+        dd($this->featuredImage);
     }
 
     public function toggleIsActive(): void
