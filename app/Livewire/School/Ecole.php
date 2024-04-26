@@ -52,14 +52,7 @@ class Ecole extends Component
 
     public function render(): View
     {
-        $ecoles = ModelEcole::with('categories')
-            ->when($this->searchQuery !== '', fn(Builder $query) => $query->where('name', 'like', '%' . $this->searchQuery . '$'))
-            ->when($this->searchCategory > 0, function (Builder $query) {
-                $query->whereHas('categories', function (Builder $query2) {
-                    $query2->where('id', $this->searchCategory);
-                });
-            })
-            ->paginate(10);
+        $ecoles = ModelEcole::paginate(10);
 
         return view('livewire.school.ecole', [
             'ecoles' => $ecoles
