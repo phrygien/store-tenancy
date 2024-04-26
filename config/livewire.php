@@ -160,5 +160,9 @@ return [
     'pagination_theme' => 'tailwind',
     // config/livewire.php
 
-    'livewire.temporary_file_upload.middleware' => ['throttle:60,1', 'universal', InitializeTenancyByDomain::class],
+    'livewire.temporary_file_upload.middleware' => [
+        'throttle:60,1',  // Limite de 60 requêtes par minute
+        'universal',      // Middleware universel pour des tâches spécifiques
+        InitializeTenancyByDomain::class,  // Middleware pour initialiser la tenue comptable par domaine
+    ],
 ];

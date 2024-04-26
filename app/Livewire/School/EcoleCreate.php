@@ -2,91 +2,72 @@
 
 namespace App\Livewire\School;
 
+use App\Livewire\Forms\EcoleForm;
+use App\Models\Ecole as ModelEcole;
+use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Illuminate\Support\Facades\File;
-use Illuminate\Http\UploadedFile;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Finder\SplFileInfo;
 class EcoleCreate extends Component
 {
     use WithFileUploads;
 
-    public $province_id;
-    public $region_id;
-    public $district_id;
-    public $commune_id;
-    public $featuredImage;
 
+    #[Validate('required|string')]
+    public $nom;
+
+    #[Validate('required|string|max:3')]
+    public $code;
+
+    #[Validate('required|email')]
+    public $email;
+
+    #[Validate('required|string|max:14')]
+    public $phone;
+
+    #[Validate('required|min:4')]
+    public $adresse;
+
+    #[Validate('required')]
+    public $province_id;
+
+    #[Validate('required')]
+    public $region_id;
+
+    #[Validate('required')]
+    public $district_id;
+
+    #[Validate('required')]
+    public $commune_id;
+
+    #[Validate('required')]
     public $is_active = false;
+
+    #[Validate('required')]
+    public $category_id;
+/**@var TemporaryUploadedFile|mixed $image
+    */
+    #[Rule('required|max:1024', as: 'Image obligatoire.')]
+    public $logo;
+
+
+    public $featuredImage;
 
     public $photos = [];
 
     // 1. We create a property that will temporarily store the uploaded files
     public $backup = [];
 
-    public function mount(): void
+    public function mount()
     {
-        // We get all files and map the contents of the files
-        // to ensure a necessary structure for the component.
-        $this->photos = collect(File::allFiles(public_path('storage/images')))->map(fn (SplFileInfo $file) => [
-            'name' => $file->getFilename(),
-            'extension' => $file->getExtension(),
-            'size' => $file->getSize(),
-            'path' => $file->getPath(),
-            'url' => Storage::url('images/'.$file->getFilename()),
-        ])->toArray();
-
-        // In this example we are using the images that exists
-        // in the application server, but you can use any other
-        // files for example, files that are stored in the S3 bucket.
-    }
-
-    public function updatingPhotos(): void
-    {
-        // 2. We store the uploaded files in the temporary property
-        $this->backup = $this->photos;
-    }
-
-    public function updatedPhotos(): void
-    {
-        if (!$this->photos) {
-            return;
-        }
-
-        // 3. We merge the newly uploaded files with the saved ones
-        $file = Arr::flatten(array_merge($this->backup, [$this->photos]));
-
-        // 4. We finishing by removing the duplicates
-        $this->photos = collect($file)->unique(fn (UploadedFile $item) => $item->getClientOriginalName())->toArray();
-    }
-
-    public function deleteUpload(array $content): void
-    {
-        /*
-        the $content contains:
-        [
-            'temporary_name',
-            'real_name', // same of 'temporary_name' in static mode
-            'extension',
-            'size',
-            'path',
-            'url',
-        ]
-        */
-
-        if (empty($this->photos)) {
-            return;
-        }
-
-        File::delete($content['path']);
-
-        $files = Arr::wrap($this->photos);
-
-        $this->photos = collect($files)
-            ->filter(fn (array $item) => $item['name'] !== $content['real_name'])
-            ->toArray();
+        //dd(ModelEcole::all());
     }
 
     public function updatingProvinceId($key): void
@@ -96,7 +77,28 @@ class EcoleCreate extends Component
 
     public function saveEcole(): void
     {
-        dd($this->featuredImage);
+        //dd($this->nom, $this->code, $this->email, $this->phone, $this->province_id, $this->region_id, $this->district_id, $this->commune_id, $this->adresse, $this->is_active, $this->category_id);
+        sleep(3);
+        $this->validate();
+
+       // store images
+       ModelEcole::create([
+        'nom' => $this->nom,
+        'code' => $this->code,
+        'email' => $this->email,
+        'phone' => $this->phone,
+        'province_id' => $this->province_id,
+        'region_id' => $this->region_id,
+        'district_id' => $this->district_id,
+        'commune_id' => $this->commune_id,
+        'adresse' => $this->adresse,
+        'user_id' => Auth::user()->id,
+        'is_active' => $this->is_active,
+        'category_id' => $this->category_id,
+        'logo' => Str::replaceFirst('public/', '', $this->logo->store('public/logos'))
+       ]);
+
+       $this->reset();
     }
 
     public function toggleIsActive(): void

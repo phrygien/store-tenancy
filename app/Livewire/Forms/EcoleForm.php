@@ -71,6 +71,7 @@ class EcoleForm extends Form
         $this->category_id = $ecole->category_id;
     }
 
+
     public function saveEcole(): void
     {
         $this->validate();

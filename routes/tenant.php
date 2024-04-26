@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Category;
 use App\Models\Commune;
 use App\Models\District;
 use Illuminate\Support\Facades\Route;
@@ -143,6 +144,28 @@ Route::middleware([
             ->map(fn (Commune $region) => $region->only('id', 'nom'));
     })->name('api.communes.index');
 
+
+    Route::get('/categories', function (Request $request) {
+        // getting initial selected values
+        $selected = json_decode($request->get('selected', ''), true);
+
+        return Category::query()
+            ->when(
+                $search = $request->get('search'),
+                fn ($query) => $query->where('name', 'like', "%{$search}%")
+            )
+            ->when(!$search && $selected, function ($query) use ($selected) {
+                $query->whereIn('id', $selected)
+                    ->orWhere(function ($query) use ($selected) {
+                        $query->whereNotIn('id', $selected)
+                            ->orderBy('name');
+                    });
+            })
+            ->limit(10)
+            ->get()
+            // mapping to the expected format
+            ->map(fn (Category $category) => $category->only('id', 'name'));
+    })->name('api.categories.all');
 
     require __DIR__.'/app-auth.php';
 });

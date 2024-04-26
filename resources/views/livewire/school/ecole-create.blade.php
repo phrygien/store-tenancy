@@ -2,7 +2,7 @@
 
             <div class="max-w-3xl py-16 mx-auto px-7 lg:py-16">
                 <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Creation ecole</h2>
-                <form wire:submit='saveEcole'>
+                <form wire:submit.prevent='saveEcole' enctype="multipart/form-data">
                     {{-- <div class="p-6 bg-white border border-gray-200 rounded-lg shadow width-full dark:bg-gray-800 dark:border-gray-700">
                         <div class="grid gap-4 mb-3 sm:grid-cols-2 sm:gap-6">
                             <div class="w-full">
@@ -80,7 +80,7 @@
                     <div class="grid gap-4 mb-3 sm:grid-cols-2 sm:gap-6">
                         <div class="w-full">
                             <label for="nom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom ecole</label>
-                            <x-ts-input wire:model='nom' />
+                            <x-ts-input wire:model.live='nom' />
                         </div>
                         <div class="w-full">
                             <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Code Unique</label>
@@ -108,7 +108,7 @@
                             <x-ts-select.styled wire:model.live='region_id' :request="[
                                 'url' => route('api.regions.index'),
                                 'method' => 'get',
-                                'params' => ['province_id' => $province_id   ],
+                                'params' => ['province_id' => $province_id ],
                             ]" select="label:nom|value:id" placeholder="select region" />
                         </div>
                         <div>
@@ -136,14 +136,15 @@
                         <div>
                             <label for="commune_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                             <x-ts-select.styled wire:model='category_id' :request="[
-                                'url' => route('ecoles.index'),
+                                'url' => route('api.categories.all'),
                                 'method' => 'get',
                                 'params' => ['library' => 'TallStackUi'],
                             ]" select="label:name|value:id" />
                         </div>
                         <div>
                             <label for="item-weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Logo</label>
-                            <x-ts-upload wire:model='photos' :preview="false" />
+                            <input wire:model='logo' class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                            @error('logo') <span class="error">{{ $message }}</span> @enderror
                         </div>
                         <div>
                             <x-ts-toggle wire:click='toggleIsActive' class="primary"/>
@@ -154,9 +155,9 @@
                         @endif
                             <input type="text" hidden ="hidden" wire:model='is_active'/>
                         </div>
-
+                        @error('is_active') <span class="error">{{ $message }}</span> @enderror
                     </div>
-                    <x-ts-button wire:click="saveEcole" loading="saveEcole">
+                    <x-ts-button loading="saveEcole">
                         Save data
                     </x-ts-button>
                 </form>

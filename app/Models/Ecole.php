@@ -11,6 +11,24 @@ class Ecole extends Model
 {
     use HasFactory;
 
+    protected $table = 'ecoles';
+
+    protected $fillable = [
+        'nom',
+        'code',
+        'email',
+        'phone',
+        'province_id',
+        'region_id',
+        'district_id',
+        'commune_id',
+        'adresse',
+        'user_id',
+        'is_active',
+        'category_id',
+        'logo'
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
