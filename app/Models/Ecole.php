@@ -29,6 +29,26 @@ class Ecole extends Model
         'logo'
     ];
 
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class, 'region_id');
+    }
+
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class, 'district_id');
+    }
+
+    public function commune(): BelongsTo
+    {
+        return $this->belongsTo(Commune::class, 'commune_id');
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -37,5 +57,9 @@ class Ecole extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function scopeSearch($query, $value){
+        $query->where('nom','like',"%{$value}%")->orWhere('email','like',"%{$value}%");
     }
 }

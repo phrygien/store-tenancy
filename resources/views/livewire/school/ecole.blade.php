@@ -1,21 +1,18 @@
 <div>
  <div class="w-full lg:ps-64">
-     <div class="space-y-2 text-center">
-        <p class="text-xl font-bold text-rose-600 dark:text-rose-600">Pas encore d'école</p>
-        <p class="text-sm dark:text-gray-300">Inscrivez votre première école pour la gestion de vos données.</p>
-        <x-ts-button primary icon-right="plus" class="mt-6" href="{{ route('ecoles.create') }}" wire:navigate >Inscrivez votre
-        l'école   <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5 12h14"></path>
-    <path d="m12 5 7 7-7 7"></path>
-  </svg></x-ts-button>
-        {{-- <button type="button" class="inline-flex items-center px-4 py-3 text-sm font-medium text-red-500 bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-neutral-800">
-        Inscrivez votre
-                l'école
-        </button> --}}
-
+    <x-ts-button href="{{ route('ecoles.create')}}" wire:navigate loading="target">
+        Add School
+    </x-ts-button>
+    <div class="mt-4">
+        <!-- 2: You can pass extra variables to the directive -->
+        <x-ts-table :$headers :$rows filter loading paginate id="users">
+            @interact('column_action', $row, $type)
+                <x-ts-button.circle color="red"
+                                 icon="trash"
+                                 wire:click="delete('{{ $row->id }}', '{{ $type }}')" />
+            @endinteract
+        </x-ts-table>
     </div>
-
-
     {{-- <div class="p-4 space-y-4 sm:p-6 sm:space-y-6">
 
         <!-- Card -->

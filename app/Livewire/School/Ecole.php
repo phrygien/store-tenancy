@@ -8,34 +8,57 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Url;
 use App\Models\Ecole as ModelEcole;
 
 class Ecole extends Component
 {
     use WithPagination;
 
-    public Collection $categories;
-    public string $searchQuery = '';
-    public int $searchCategory = 0;
+    // use WithPagination;
 
-    public function mount(): void
+    // #[Url(history:true)]
+    // public $search = '';
+
+    // #[Url(history:true)]
+    // public $is_active = '';
+
+    // #[Url(history:true)]
+    // public $sortBy = 'created_at';
+
+    // #[Url(history:true)]
+    // public $sortDir = 'DESC';
+
+    // #[Url()]
+    // public $perPage = 1;
+
+
+    public ?int $quantity = 1;
+
+    public ?string $search = null;
+
+    // public function updatedSearch(){
+    //     $this->resetPage();
+    // }
+
+    // public function delete(ModelEcole $ecole){
+    //     $ecole->delete();
+    // }
+
+    // public function setSortBy($sortByField){
+
+    //     if($this->sortBy === $sortByField){
+    //         $this->sortDir = ($this->sortDir == "ASC") ? 'DESC' : "ASC";
+    //         return;
+    //     }
+
+    //     $this->sortBy = $sortByField;
+    //     $this->sortDir = 'DESC';
+    // }
+    public function delete(string $id): void
     {
-        $this->categories = Category::pluck('name', 'id');
+        dd($id);
     }
-
-    public function updating($key): void
-    {
-        if ($key === 'searchQuery' || $key === 'searchCategory') {
-            $this->resetPage();
-        }
-    }
-
-    public function deleteEcole(int $ecoleId): void
-    {
-        ModelEcole::where('id', $ecoleId)->delete();
-    }
-
-
 
     public function placeholder()
     {
@@ -52,10 +75,38 @@ class Ecole extends Component
 
     public function render(): View
     {
-        $ecoles = ModelEcole::paginate(10);
+        // $ecoles = ModelEcole::paginate(10);
 
-        return view('livewire.school.ecole', [
-            'ecoles' => $ecoles
+        // return view('livewire.school.ecole', [
+        //     'ecoles' => ModelEcole::search($this->search)
+        //     ->when($this->is_active !== '',function($query){
+        //         $query->where('is_active',$this->is_active);
+        //     })
+        //     ->orderBy($this->sortBy,$this->sortDir)
+        //     ->paginate($this->perPage)
+        // ]);
+         return view('livewire.school.ecole',[
+            'headers' => [
+                ['index' => 'id', 'label' => '#'],
+                ['index' => 'nom', 'label' => 'Nom'],
+                ['index' => 'code', 'label' => 'Code Unique'],
+                ['index' => 'phone', 'label' => 'Telephone mobile'],
+                ['index' => 'email', 'label' => 'Adresse e-mail'],
+                ['index' => 'province.nom', 'label' => 'Province'],
+                ['index' => 'region.nom', 'label' => 'Region'],
+                ['index' => 'district.libelle', 'label' => 'District'],
+                ['index' => 'commune.nom', 'label' => 'Commune'],
+                ['index' => 'adresse', 'label' => 'Adresse exacte'],
+                ['index' => 'action'],
+            ],
+            'rows' => ModelEcole::query()
+                ->with(['province'])
+                ->when($this->search, function (Builder $query) {
+                    return $query->where('nom', 'like', "%{$this->search}%");
+                })
+                ->paginate($this->quantity)
+                ->withQueryString(),
+            'type' => 'data',
         ]);
     }
 }

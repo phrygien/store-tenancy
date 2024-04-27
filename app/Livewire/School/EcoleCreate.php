@@ -16,10 +16,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Finder\SplFileInfo;
+use TallStackUi\Traits\Interactions;
 class EcoleCreate extends Component
 {
     use WithFileUploads;
-
+    use Interactions;
 
     #[Validate('required|string')]
     public $nom;
@@ -113,28 +114,33 @@ class EcoleCreate extends Component
 
     public function saveEcole(): void
     {
-        //dd($this->nom, $this->code, $this->email, $this->phone, $this->province_id, $this->region_id, $this->district_id, $this->commune_id, $this->adresse, $this->is_active, $this->category_id);
-        sleep(3);
-        $this->validate();
+            $verification = $this->validate();
+            // store images
+            ModelEcole::create([
+                'nom' => $this->nom,
+                'code' => $this->code,
+                'email' => $this->email,
+                'phone' => $this->phone,
+                'province_id' => $this->province_id,
+                'region_id' => $this->region_id,
+                'district_id' => $this->district_id,
+                'commune_id' => $this->commune_id,
+                'adresse' => $this->adresse,
+                'user_id' => Auth::user()->id,
+                'is_active' => $this->is_active,
+                'category_id' => $this->category_id,
+                'logo' => Str::replaceFirst('public/', '', $this->logo->store('public/logos'))
+               ]);
 
-       // store images
-       ModelEcole::create([
-        'nom' => $this->nom,
-        'code' => $this->code,
-        'email' => $this->email,
-        'phone' => $this->phone,
-        'province_id' => $this->province_id,
-        'region_id' => $this->region_id,
-        'district_id' => $this->district_id,
-        'commune_id' => $this->commune_id,
-        'adresse' => $this->adresse,
-        'user_id' => Auth::user()->id,
-        'is_active' => $this->is_active,
-        'category_id' => $this->category_id,
-        'logo' => Str::replaceFirst('public/', '', $this->logo->store('public/logos'))
-       ]);
+               $this->reset();
 
-       $this->reset();
+               $this->banner()
+                        ->close()
+                        ->success('Ecole bien enregistrer !')
+                        ->leave(5)
+                        ->send();
+
+
     }
 
     public function toggleIsActive(): void
